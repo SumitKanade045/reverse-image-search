@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reverse Image Search</title>
+</head>
+<body>
+    <h1>Upload an Image to Search</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="query_img" required accept="image/*">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if query_path %}
+        <h2>Query Image:</h2>
+        <img src="{{ query_path }}" alt="Query Image" style="height: 200px;">
+    {% endif %}
+
+    {% if results %}
+        <h2>Results:</h2>
+        {% for path, score in results %}
+            <div style="margin-bottom: 20px;">
+                <img src="{{ path }}" style="height: 150px;">
+                <p>Similarity Score: {{ score }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
